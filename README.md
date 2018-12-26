@@ -40,8 +40,8 @@ The building order is important since the `processor` project depends on `builde
 
 # TODO 
 
- - Map with custom types are not working
- - Look over [kotlin-builder-annotation](https://github.com/ThinkingLogic/kotlin-builder-annotation) project and replace with class generating module (builder-processor)
+ - ~~Map with custom types are not working~~
+ - ~~Look over [kotlin-builder-annotation](https://github.com/ThinkingLogic/kotlin-builder-annotation) project and replace with class generating module (builder-processor)~~
  - Writing tests
  - Versioning and release process 
 

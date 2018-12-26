@@ -70,7 +70,7 @@ class BuilderProcessor : AbstractProcessor() {
 
         constructors.stream().flatMap { it.parameters.stream() }
                 .forEach {
-                    val fieldType = parseType(it.asType().toString())
+                    val fieldType = ClassName.get(it.asType())
                     val fieldName = it.simpleName.toString()
                     val field = FieldSpec.builder(fieldType, fieldName, Modifier.PRIVATE).build()
                     builder.addField(field)
@@ -116,28 +116,6 @@ class BuilderProcessor : AbstractProcessor() {
                 .returns(ClassName.get(packageOf.toString(), builderClassName))
                 .addStatement("return new \$T()", ClassName.get(packageOf.toString(), builderClassName))
                 .build()
-    }
-
-    private fun parseType(className: String): Class<*> {
-        when (className) {
-            "boolean" -> return Boolean::class.javaPrimitiveType!!
-            "byte" -> return Byte::class.javaPrimitiveType!!
-            "short" -> return Short::class.javaPrimitiveType!!
-            "int" -> return Int::class.javaPrimitiveType!!
-            "long" -> return Long::class.javaPrimitiveType!!
-            "float" -> return Float::class.javaPrimitiveType!!
-            "double" -> return Double::class.javaPrimitiveType!!
-            "char" -> return Char::class.javaPrimitiveType!!
-            "void" -> return Void.TYPE
-            else -> {
-                try {
-                    return Class.forName(className)
-                } catch (ex: ClassNotFoundException) {
-                    throw IllegalArgumentException("Class not found: $className")
-                }
-
-            }
-        }
     }
 
     override fun getSupportedAnnotationTypes(): Set<String> {
