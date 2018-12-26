@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext {
         kotlin_version = '1.3.11'
-        kotlinMapstructAnnotationVersion = '1.0-SNAPSHOT'
+        kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
     }
 
     repositories {
@@ -21,7 +21,7 @@ buildscript {
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
@@ -34,7 +34,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "com.google.auto.service:auto-service:1.0-rc4"
     implementation 'com.squareup:javapoet:1.11.1'
-    implementation "com.github.pozo:kotlin-builder-annotation:$kotlinMapstructAnnotationVersion"
+    implementation "com.github.pozo:kotlin-builder-annotation:$kotlinBuilderAnnotationVersion"
 
     implementation 'org.slf4j:slf4j-api:1.7.25'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
@@ -43,6 +43,18 @@ dependencies {
     kapt "com.google.auto.service:auto-service:1.0-rc4"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'kotlin-builder-processor'
+            version = version
+
+            from components.java
+        }
+    }
 }
 
 compileKotlin {

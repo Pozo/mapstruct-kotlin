@@ -15,7 +15,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
@@ -29,4 +29,16 @@ dependencies {
     implementation "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'mapstruct-kotlin-builder-processor'
+            version = version
+
+            from components.java
+        }
+    }
 }

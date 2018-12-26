@@ -6,8 +6,9 @@ buildscript {
         kotlin_version = '1.3.11'
         mapstructVersion = '1.3.0.Beta2'
 
-        kotlinMapstructAnnotationVersion = '1.0-SNAPSHOT'
-        kotlinMapstructBuilderProcessorVersion = '1.0-SNAPSHOT'
+        kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
+        kotlinBuilderProcessorVersion = '1.0-SNAPSHOT'
+
         kotlinMapstructProcessorVersion = '1.0-SNAPSHOT'
     }
 
@@ -34,11 +35,11 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile("com.github.pozo:kotlin-builder-annotation:${kotlinMapstructAnnotationVersion}")
+    compile("com.github.pozo:kotlin-builder-annotation:${kotlinBuilderAnnotationVersion}")
     compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
 
-    kapt("com.github.pozo:kotlin-builder-processor:${kotlinMapstructBuilderProcessorVersion}")
-    kapt("com.github.pozo:kotlin-mapstruct-processor:${kotlinMapstructProcessorVersion}")
+    kapt("com.github.pozo:kotlin-builder-processor:${kotlinBuilderProcessorVersion}")
+    kapt("com.github.pozo:mapstruct-kotlin-builder-processor:${kotlinMapstructProcessorVersion}")
     kapt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
