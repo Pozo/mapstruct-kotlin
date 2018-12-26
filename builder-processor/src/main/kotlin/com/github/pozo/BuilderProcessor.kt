@@ -24,13 +24,12 @@ class BuilderProcessor : AbstractProcessor() {
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         logger.info("roundEnv = $roundEnv")
 
-        val annotatedKotlinClasses = roundEnv.getElementsAnnotatedWith(KotlinBuilder::class.java)
-                .filterIsInstance<TypeElement>()
-                .filter { it -> isAnnotatedByKotlin(it) }
-                .filter { it -> isDataClass(it) }
+        roundEnv.getElementsAnnotatedWith(KotlinBuilder::class.java)
+            .filterIsInstance<TypeElement>()
+            .filter { it -> isAnnotatedByKotlin(it) }
+            .filter { it -> isDataClass(it) }
+            .forEach { generateBuilder(it) }
 
-
-        generateBuilders(annotatedKotlinClasses)
         return true
     }
 
@@ -51,12 +50,6 @@ class BuilderProcessor : AbstractProcessor() {
                             .startsWith("component")
                 }
                 .count() > 0
-    }
-
-    private fun generateBuilders(typeElements: List<TypeElement>) {
-        typeElements.forEach {
-            generateBuilder(it)
-        }
     }
 
     private fun generateBuilder(it: TypeElement) {
