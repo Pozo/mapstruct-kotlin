@@ -1,0 +1,5 @@
+rootProject.name = 'mapstruct-kotlin'
+include 'annotation'
+include 'processor'
+include 'builder-processor'
+include 'test'
