@@ -7,6 +7,10 @@ public class TestJavaClass {
 
     private int age;
 
+    public static void main(String[] args) {
+        System.out.println("args = " + args);
+    }
+
     public String getName() {
         return name;
     }
@@ -21,9 +25,5 @@ public class TestJavaClass {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("args = " + args);
     }
 }
