@@ -18,6 +18,16 @@ import java.util.stream.Collectors;
 
 public class KotlinBuilderProvider extends DefaultBuilderProvider implements BuilderProvider {
 
+    private static final String BUILDER_CLASS_POSTFIX = "Builder";
+
+    private static final String CREATE_METHOD_NAME = "create";
+
+    private static final String BUILDER_METHOD_NAME = "builder";
+
+    private static final String KOTLIN_METADATA_CLASS_NAME = "kotlin.Metadata";
+
+    private static final String KOTLIN_BUILDER_ANNOTATION_CLASS_NAME = "com.github.pozo.KotlinBuilder";
+
     @Override
     public void init(MapStructProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
@@ -44,11 +54,12 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
 
         List<ExecutableElement> builderMethods = ElementFilter.methodsIn(builder.getEnclosedElements())
                 .stream()
-                .filter(executableElement -> "create".equals(executableElement.getSimpleName().toString()))
+                .filter(executableElement -> CREATE_METHOD_NAME.equals(executableElement.getSimpleName().toString()))
                 .collect(Collectors.toList());
+
         List<ExecutableElement> builderCreatonMethods = ElementFilter.methodsIn(builder.getEnclosedElements())
                 .stream()
-                .filter(executableElement -> "builder".equals(executableElement.getSimpleName().toString()))
+                .filter(executableElement -> BUILDER_METHOD_NAME.equals(executableElement.getSimpleName().toString()))
                 .collect(Collectors.toList());
 
         return new BuilderInfo.Builder()
@@ -57,6 +68,7 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
                 .build();
     }
 
+    // from org.mapstruct.ap.spi.ImmutablesBuilderProvider
     private TypeElement asBuilderElement(TypeElement typeElement) {
         Element enclosingElement = typeElement.getEnclosingElement();
         StringBuilder builderQualifiedName = new StringBuilder();
@@ -70,20 +82,20 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
             builderQualifiedName.append(".");
         }
 
-        builderQualifiedName.append(typeElement.getSimpleName()).append("Builder");
+        builderQualifiedName.append(typeElement.getSimpleName()).append(BUILDER_CLASS_POSTFIX);
         return elementUtils.getTypeElement(builderQualifiedName);
     }
 
     private boolean isAnnotatedByKotlin(TypeElement typeElement) {
         return typeElement.getAnnotationMirrors()
                 .stream()
-                .anyMatch(o -> "kotlin.Metadata".equals(o.getAnnotationType().toString()));
+                .anyMatch(o -> KOTLIN_METADATA_CLASS_NAME.equals(o.getAnnotationType().toString()));
     }
 
     private boolean isAnnotatedByKotlinBuilder(TypeElement typeElement) {
         return typeElement.getAnnotationMirrors()
                 .stream()
-                .anyMatch(o -> "com.github.pozo.KotlinBuilder".equals(o.getAnnotationType().toString()));
+                .anyMatch(annotationMirror -> KOTLIN_BUILDER_ANNOTATION_CLASS_NAME.equals(annotationMirror.getAnnotationType().toString()));
     }
 }
 
