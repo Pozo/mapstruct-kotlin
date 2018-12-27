@@ -1,8 +1,16 @@
 package com.github.pozo;
 
-import org.mapstruct.ap.spi.*;
+import org.mapstruct.ap.spi.BuilderInfo;
+import org.mapstruct.ap.spi.BuilderProvider;
+import org.mapstruct.ap.spi.DefaultBuilderProvider;
+import org.mapstruct.ap.spi.MapStructProcessingEnvironment;
+import org.mapstruct.ap.spi.TypeHierarchyErroneousException;
 
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import java.util.List;
@@ -77,16 +85,5 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
                 .stream()
                 .anyMatch(o -> "com.github.pozo.KotlinBuilder".equals(o.getAnnotationType().toString()));
     }
-
-    private boolean isDataClass(TypeElement typeElement) {
-        // TODO Improve data class filtering
-        return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-                .stream()
-                .anyMatch(executableElement -> executableElement.getSimpleName()
-                        .toString()
-                        .startsWith("component")
-                );
-    }
-
 }
 
