@@ -6,3 +6,7 @@ import java.math.BigDecimal
 
 @KotlinBuilder
 data class TestTwo(val age: Int, val price: BigDecimal, val test: Test)
+
+
+@KotlinBuilder
+class TestThree(val age: Int, val price: BigDecimal, val test: Test)

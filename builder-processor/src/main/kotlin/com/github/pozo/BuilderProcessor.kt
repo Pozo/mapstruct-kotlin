@@ -1,10 +1,22 @@
 package com.github.pozo
 
 import com.google.auto.service.AutoService
-import com.squareup.javapoet.*
+import com.squareup.javapoet.ClassName
+import com.squareup.javapoet.FieldSpec
+import com.squareup.javapoet.JavaFile
+import com.squareup.javapoet.MethodSpec
+import com.squareup.javapoet.TypeSpec
+import kotlinx.metadata.Flag
+import kotlinx.metadata.Flags
+import kotlinx.metadata.KmClassVisitor
+import kotlinx.metadata.jvm.KotlinClassHeader
+import kotlinx.metadata.jvm.KotlinClassMetadata
 import org.slf4j.LoggerFactory
-import javax.annotation.processing.*
+import javax.annotation.processing.AbstractProcessor
+import javax.annotation.processing.Processor
+import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.SourceVersion
+import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.PackageElement
 import javax.lang.model.element.TypeElement
@@ -12,14 +24,8 @@ import javax.lang.model.util.ElementFilter
 
 
 @AutoService(Processor::class)
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
-@SupportedOptions(BuilderProcessor.KAPT_KOTLIN_GENERATED_OPTION_NAME)
 class BuilderProcessor : AbstractProcessor() {
     private val logger = LoggerFactory.getLogger(javaClass)
-
-    companion object {
-        const val KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
-    }
 
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         logger.info("roundEnv = $roundEnv")
@@ -41,15 +47,20 @@ class BuilderProcessor : AbstractProcessor() {
     }
 
     private fun isDataClass(it: TypeElement): Boolean {
-        // TODO Improve data class filtering
-        return ElementFilter.methodsIn(it.enclosedElements)
-                .stream()
-                .filter {
-                    it.simpleName
-                            .toString()
-                            .startsWith("component")
-                }
-                .count() > 0
+        val kotlinClassHeader = it.readHeader()
+        val kotlinClassMetadata = KotlinClassMetadata.read(kotlinClassHeader)
+
+        var isDataClass = false
+        when (kotlinClassMetadata) {
+            is KotlinClassMetadata.Class -> {
+                kotlinClassMetadata.accept(object : KmClassVisitor() {
+                    override fun visit(flags: Flags, name: kotlinx.metadata.ClassName) {
+                        isDataClass = Flag.Class.IS_DATA(flags)
+                    }
+                })
+            }
+        }
+        return isDataClass
     }
 
     private fun generateBuilder(it: TypeElement) {
@@ -113,5 +124,22 @@ class BuilderProcessor : AbstractProcessor() {
 
     override fun getSupportedAnnotationTypes(): Set<String> {
         return setOf(KotlinBuilder::class.java.canonicalName)
+    }
+
+    override fun getSupportedSourceVersion(): SourceVersion {
+        return SourceVersion.RELEASE_8
+    }
+
+    override fun getSupportedOptions(): Set<String> {
+        return setOf("kapt.kotlin.generated")
+    }
+
+    // https://github.com/JetBrains/kotlin/tree/master/libraries/kotlinx-metadata/jvm
+    // https://github.com/square/moshi/pull/570/files
+    @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+    fun Element.readHeader(): KotlinClassHeader {
+        return getAnnotation(Metadata::class.java).run {
+            KotlinClassHeader(kind, metadataVersion, bytecodeVersion, data1, data2, extraString, packageName, extraInt)
+        }
     }
 }

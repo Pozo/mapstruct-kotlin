@@ -4,6 +4,7 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext {
         kotlin_version = '1.3.11'
+        kotlinxMetadataVersion = '0.0.5'
         kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
     }
 
@@ -28,10 +29,12 @@ sourceCompatibility = 1.8
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:${kotlinxMetadataVersion}"
     implementation "com.google.auto.service:auto-service:1.0-rc4"
     implementation 'com.squareup:javapoet:1.11.1'
     implementation "com.github.pozo:kotlin-builder-annotation:$kotlinBuilderAnnotationVersion"
