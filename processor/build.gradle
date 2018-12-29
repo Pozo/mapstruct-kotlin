@@ -28,7 +28,7 @@ dependencies {
     implementation("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
     implementation "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
 publishing {
