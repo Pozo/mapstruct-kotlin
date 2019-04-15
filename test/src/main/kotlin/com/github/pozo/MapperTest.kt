@@ -66,6 +66,14 @@ class MapperTest {
     }
 
     @Test
+    fun testRole() {
+        val roleDto = roleMapper.toDto(role)
+        val roleFromDto = roleMapper.toRole(roleDto)
+        assertEquals(roleFromDto.id, roleDto.id)
+        assertEquals(roleFromDto.name, roleDto.name)
+    }
+
+    @Test
     fun testPersonsRoleDto() {
         val copy = person.copy(role = role)
         val personDto = personMapper.toDto(copy)
