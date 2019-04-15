@@ -8,6 +8,8 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 
+
+
 /**
  *
  * Created by gmribas on 15/04/19.
@@ -38,6 +40,14 @@ class MapperTest {
         assertNull(personDto.birthDate)
         assertNull(personDto.phone)
         assertNull(personDto.role)
+    }
+
+    @Test
+    fun testPerson() {
+        val personDto = personMapper.toDto(person)
+        val personFromDto = personMapper.toPerson(personDto)
+        assertEquals(person.firstName, personFromDto.firstName)
+        assertEquals(person.lastName, personFromDto.lastName)
     }
 
     @Test

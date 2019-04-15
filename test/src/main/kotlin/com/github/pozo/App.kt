@@ -16,7 +16,7 @@ data class Person(val firstName: String, val lastName: String, val age: Int, val
 data class PersonTwo(val name: String, val age: Int)
 
 @KotlinBuilder
-data class Role(val id: Int, val name: String, val abbreviation: String)
+data class Role(val id: Int, val name: String, val abbreviation: String?)
 
 @KotlinBuilder
 data class RoleDto(val id: Int, val name: String, val ignoredAttr: Int?)
