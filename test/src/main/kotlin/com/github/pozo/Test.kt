@@ -6,4 +6,4 @@ import java.time.LocalDate
 data class Test(val age: Int, val meh: Person)
 
 @KotlinBuilder
-data class PersonDto(val firstName: String, val lastName: String, val phone: String, val birthdate: LocalDate)
+data class PersonDto(val firstName: String, val lastName: String, val phone: String?, val birthDate: LocalDate?, val role: RoleDto?)

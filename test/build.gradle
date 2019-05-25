@@ -35,15 +35,17 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile("com.github.pozo:kotlin-builder-annotation:${kotlinBuilderAnnotationVersion}")
-    compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation("com.github.pozo:kotlin-builder-annotation:${kotlinBuilderAnnotationVersion}")
+    implementation("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
 
     kapt("com.github.pozo:kotlin-builder-processor:${kotlinBuilderProcessorVersion}")
     kapt("com.github.pozo:mapstruct-kotlin-builder-processor:${kotlinMapstructProcessorVersion}")
     kapt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "junit:junit:4.12"
+    implementation "junit:junit:4.12"
 }
 
 compileKotlin {
