@@ -8,12 +8,6 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 
-
-
-/**
- *
- * Created by gmribas on 15/04/19.
- */
 class MapperTest {
 
     private lateinit var person: Person

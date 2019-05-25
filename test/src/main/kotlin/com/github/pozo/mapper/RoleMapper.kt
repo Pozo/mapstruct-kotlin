@@ -7,10 +7,6 @@ import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
 
-/**
- *
- * Created by gmribas on 15/04/19.
- */
 @Mapper
 interface RoleMapper {
 
