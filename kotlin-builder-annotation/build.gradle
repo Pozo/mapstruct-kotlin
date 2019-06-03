@@ -18,10 +18,6 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = group
-            artifactId = 'kotlin-builder-annotation'
-            version = version
-
             from components.java
         }
     }

@@ -38,7 +38,7 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation("com.github.pozo:kotlin-builder-annotation:${kotlinBuilderAnnotationVersion}")
-    implementation("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
 
     kapt("com.github.pozo:kotlin-builder-processor:${kotlinBuilderProcessorVersion}")
     kapt("com.github.pozo:mapstruct-kotlin-builder-processor:${kotlinMapstructProcessorVersion}")

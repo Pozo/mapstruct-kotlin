@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
     implementation "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testImplementation 'junit:junit:4.12'
@@ -19,10 +19,6 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = group
-            artifactId = 'mapstruct-kotlin-builder-processor'
-            version = version
-
             from components.java
         }
     }
