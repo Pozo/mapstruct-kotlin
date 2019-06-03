@@ -32,11 +32,9 @@ With a mapper
 
 The building order is important since the `processor` project depends on `builder-processor` and mapstruct. 
 
-    ./gradlew annotation:clean annotation:build annotation:publishToMavenLocal
-    ./gradlew builder-processor:clean builder-processor:build builder-processor:publishToMavenLocal
-    ./gradlew processor:clean processor:build processor:publishToMavenLocal
+    ./gradlew clean build publishToMavenLocal
 
-    ./gradlew test:clean test:build
+    ./gradlew -p test clean build
 
 # TODO 
 

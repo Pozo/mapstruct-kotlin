@@ -1,2 +1,24 @@
 group 'com.github.pozo'
 version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        kotlin_version = '1.3.21'
+        kotlinxMetadataVersion = '0.0.5'
+        kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
+        autoServiceVersion = '1.0-rc4'
+        mapstructVersion = '1.3.0.Beta2'
+        javaPoetVersion = '1.11.1'
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url('https://plugins.gradle.org/m2/')
+        }
+    }
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
