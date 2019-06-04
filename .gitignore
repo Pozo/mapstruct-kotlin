@@ -19,7 +19,7 @@ hs_err_pid*
 
 # Ignore idea related stuff
 
-.idea/**
+/**/.idea/**
 /**/out/
 
 # Ignore gradle related stuff
