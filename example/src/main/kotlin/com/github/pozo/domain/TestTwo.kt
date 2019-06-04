@@ -1,4 +1,4 @@
-package com.github.pozo.meh
+package com.github.pozo.domain
 
 import com.github.pozo.KotlinBuilder
 import com.github.pozo.Test

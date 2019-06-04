@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        kotlin_version = '1.3.11'
+        kotlin_version = '1.3.21'
         mapstructVersion = '1.3.0.Beta2'
         mapstructKotlinVersion = '1.0-SNAPSHOT'
     }
@@ -42,7 +42,6 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation 'junit:junit:4.12'
-    implementation 'junit:junit:4.12'
 }
 
 compileKotlin {

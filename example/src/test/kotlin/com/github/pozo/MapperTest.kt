@@ -4,9 +4,9 @@ import com.github.pozo.mapper.PersonMapper
 import com.github.pozo.mapper.PersonMapperImpl
 import com.github.pozo.mapper.RoleMapper
 import com.github.pozo.mapper.RoleMapperImpl
-import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 
 class MapperTest {
 
