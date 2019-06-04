@@ -21,6 +21,20 @@ With a mapper
         fun map(person: Person): PersonDto
     }
     
+#### Jitpack release
+
+__Please keep in your mind that this repository still a proof of concept, and absolutely not ready for production. A contribution, idea, discussion is always welcomed__
+
+A version which is using the mapstruct 1.3.0.Beta2 is available on [jitpack.io](https://jitpack.io/#Pozo/mapstruct-kotlin).  
+
+#### Jitpack howto
+    
+First of all add `maven { url 'https://jitpack.io' }` to your repositories, and then add these to your dependencies
+
+    api("com.github.pozo.mapstruct-kotlin:mapstruct-kotlin:1.3.0.Beta2")
+    
+    kapt("com.github.pozo.mapstruct-kotlin:mapstruct-kotlin-processor:1.3.0.Beta2")
+
 #### Project structure
 
  - `annotation` contains only the `KotlinBuilder` annotation
@@ -34,7 +48,7 @@ The building order is important since the `processor` project depends on `builde
 
     ./gradlew clean build publishToMavenLocal
 
-    ./gradlew -p test clean build
+    ./gradlew -p example clean build
 
 # TODO 
 
