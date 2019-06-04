@@ -28,8 +28,8 @@ class BuilderProcessor : AbstractProcessor() {
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         roundEnv.getElementsAnnotatedWith(KotlinBuilder::class.java)
             .filterIsInstance<TypeElement>()
-            .filter { it -> isAnnotatedByKotlin(it) }
-            .filter { it -> isDataClass(it) }
+            .filter { isAnnotatedByKotlin(it) }
+            .filter { isDataClass(it) }
             .forEach { generateBuilder(it) }
 
         return true
@@ -38,7 +38,7 @@ class BuilderProcessor : AbstractProcessor() {
     private fun isAnnotatedByKotlin(it: TypeElement): Boolean {
         return it.annotationMirrors
             .stream()
-            .filter { Metadata::class.java.canonicalName.equals(it.annotationType.toString()) }
+            .filter { Metadata::class.java.canonicalName == it.annotationType.toString() }
             .count() > 0
     }
 
