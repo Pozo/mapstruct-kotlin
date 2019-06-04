@@ -26,6 +26,7 @@ dependencies {
 
     kapt "com.google.auto.service:auto-service:${autoServiceVersion}"
 
+    testImplementation 'org.mockito:mockito-core:2.28.2'
     testImplementation 'junit:junit:4.12'
 }
 

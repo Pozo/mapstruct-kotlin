@@ -39,14 +39,18 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
         if (typeElement == null) {
             return null;
         }
-        if (isAnnotatedByKotlin(typeElement) && isAnnotatedByKotlinBuilder(typeElement)) {
+        if (isKotlinBuilder(typeElement)) {
             return findBuilder(typeElement);
         } else {
             return super.findBuilderInfo(type);
         }
     }
 
-    private BuilderInfo findBuilder(TypeElement typeElement) {
+    boolean isKotlinBuilder(TypeElement typeElement) {
+        return isAnnotatedByKotlin(typeElement) && isAnnotatedByKotlinBuilder(typeElement);
+    }
+
+    BuilderInfo findBuilder(TypeElement typeElement) {
         final TypeElement builder = asBuilderElement(typeElement);
         if (builder == null) {
             throw new TypeHierarchyErroneousException(typeElement);
@@ -69,7 +73,7 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
     }
 
     // from org.mapstruct.ap.spi.ImmutablesBuilderProvider
-    private TypeElement asBuilderElement(TypeElement typeElement) {
+    TypeElement asBuilderElement(TypeElement typeElement) {
         Element enclosingElement = typeElement.getEnclosingElement();
         StringBuilder builderQualifiedName = new StringBuilder();
         if (enclosingElement.getKind() == ElementKind.PACKAGE) {
@@ -89,7 +93,7 @@ public class KotlinBuilderProvider extends DefaultBuilderProvider implements Bui
     private boolean isAnnotatedByKotlin(TypeElement typeElement) {
         return typeElement.getAnnotationMirrors()
                 .stream()
-                .anyMatch(o -> KOTLIN_METADATA_CLASS_NAME.equals(o.getAnnotationType().toString()));
+                .anyMatch(annotationMirror -> KOTLIN_METADATA_CLASS_NAME.equals(annotationMirror.getAnnotationType().toString()));
     }
 
     private boolean isAnnotatedByKotlinBuilder(TypeElement typeElement) {
