@@ -15,11 +15,14 @@ repositories {
 }
 
 dependencies {
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    implementation "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:${kotlinxMetadataVersion}"
     implementation "com.google.auto.service:auto-service:${autoServiceVersion}"
     implementation "com.squareup:javapoet:${javaPoetVersion}"
-    implementation(project(':kotlin-builder-annotation'))
+
+    implementation(project(':mapstruct-kotlin-builder'))
 
     kapt "com.google.auto.service:auto-service:${autoServiceVersion}"
 

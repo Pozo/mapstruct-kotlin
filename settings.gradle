@@ -1,4 +1,3 @@
 rootProject.name = 'mapstruct-kotlin'
-include 'kotlin-builder-annotation'
-include 'kotlin-builder-processor'
-include 'mapstruct-kotlin-builder-processor'
+include 'mapstruct-kotlin-builder'
+include 'mapstruct-kotlin-processor'

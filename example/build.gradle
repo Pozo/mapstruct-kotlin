@@ -5,11 +5,7 @@ buildscript {
     ext {
         kotlin_version = '1.3.11'
         mapstructVersion = '1.3.0.Beta2'
-
-        kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
-        kotlinBuilderProcessorVersion = '1.0-SNAPSHOT'
-
-        kotlinMapstructProcessorVersion = '1.0-SNAPSHOT'
+        mapstructKotlinVersion = '1.0-SNAPSHOT'
     }
 
     repositories {
@@ -36,12 +32,12 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation("com.github.pozo:kotlin-builder-annotation:${kotlinBuilderAnnotationVersion}")
-    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    api("com.github.pozo:mapstruct-kotlin:${mapstructKotlinVersion}")
+    api("org.mapstruct:mapstruct:${mapstructVersion}")
 
-    kapt("com.github.pozo:kotlin-builder-processor:${kotlinBuilderProcessorVersion}")
-    kapt("com.github.pozo:mapstruct-kotlin-builder-processor:${kotlinMapstructProcessorVersion}")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    kapt("com.github.pozo:mapstruct-kotlin-processor:${mapstructKotlinVersion}")
     kapt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
 
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"

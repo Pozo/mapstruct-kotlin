@@ -18,6 +18,10 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
+            groupId = group
+            artifactId = 'mapstruct-kotlin'
+            version = version
+
             from components.java
         }
     }
