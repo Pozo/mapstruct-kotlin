@@ -5,7 +5,7 @@ buildscript {
     ext {
         kotlin_version = '1.3.61'
         mapstructVersion = '1.3.1.Final'
-        mapstructKotlinVersion = '1.3.1-SNAPSHOT'
+        mapstructKotlinVersion = '1.3.1.0'
     }
 
     repositories {
