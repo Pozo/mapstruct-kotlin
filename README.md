@@ -3,38 +3,38 @@
 Since mapstruct [1.3.0.Beta2](http://mapstruct.org/news/2018-07-15-mapstruct-1_3_0_Beta1-is-out-with-builder-support/) it's possible to use builders for immutable classes. [According to the documentation](http://mapstruct.org/documentation/dev/reference/html/#mapping-with-builders) you can implement your custom builder provider logic. This project take advantage of this and provide a custom `BuilderProvider` for kotlin data classes.
  
 So instead of this ([source](https://github.com/mapstruct/mapstruct-examples/tree/master/mapstruct-kotlin))
-
-    data class PersonDto(var firstName: String?, var lastName: String?, var phone: String?, var birthdate: LocalDate?) {
-        // Necessary for MapStruct
-        constructor() : this(null, null, null, null)
-    } 
-
+```kotlin
+data class PersonDto(var firstName: String?, var lastName: String?, var phone: String?, var birthdate: LocalDate?) {
+    // Necessary for MapStruct
+    constructor() : this(null, null, null, null)
+} 
+```
 We can do this
-
-    @KotlinBuilder
-    data class PersonDto(val firstName: String, val lastName: String, val phone: String, val birthdate: LocalDate)
-    
+```kotlin
+@KotlinBuilder
+data class PersonDto(val firstName: String, val lastName: String, val phone: String, val birthdate: LocalDate)
+```   
 With a mapper
-
-    @Mapper
-    interface PersonMapper {
-        fun map(person: Person): PersonDto
-    }
-    
+```kotlin
+@Mapper
+interface PersonMapper {
+    fun map(person: Person): PersonDto
+}
+```    
 #### Usage
 First apply kapt plugin
-
-    apply plugin: 'kotlin-kapt'
-    
+```groovy
+apply plugin: 'kotlin-kapt'
+```
 Then add these to your project as dependency
-
-    api("com.github.pozo:mapstruct-kotlin:1.3.1.0")
-    kapt("com.github.pozo:mapstruct-kotlin-processor:1.3.1.0")
-
+```groovy
+api("com.github.pozo:mapstruct-kotlin:1.3.1.0")
+kapt("com.github.pozo:mapstruct-kotlin-processor:1.3.1.0")
+```
 Check out the directory `example` for a basic usage example.
 #### Versioning
 
-For example `1.3.1.0` the `1.3.1` is the mapstruct version and the last digit, in this case `0` reserved for patches.
+For example in case of `1.3.1.0` the first part `1.3.1` is the mapstruct version number and the last digit `0` reserved for future patches.
 #### Project structure
 
  - `mapstruct-kotlin-builder` contains only the `KotlinBuilder` annotation
