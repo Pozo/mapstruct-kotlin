@@ -2,11 +2,11 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
 }
@@ -27,12 +27,67 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = 'mapstruct-kotlin-processor'
+                description = 'KotlinBuilder annotation processor'
+                url = 'https://github.com/Pozo/mapstruct-kotlin'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'pozo'
+                        name = 'Zoltan Polgar'
+                        email = 'pozo@gmx.com'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/Pozo/mapstruct-kotlin/tree/master'
+                    connection = 'scm:git:git://github.com/Pozo/mapstruct-kotlin.git'
+                    developerConnection = 'scm:git:ssh://github.com:Pozo/mapstruct-kotlin.git'
+                }
+            }
         }
     }
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+            credentials {
+                username "${nexusUsername}"
+                password "${nexusPassword}"
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.maven
 }
 
 compileKotlin {

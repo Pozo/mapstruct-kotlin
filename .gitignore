@@ -16,6 +16,7 @@ hs_err_pid*
 # Secrets
 
 /**/*.pem
+/**/*.gpg
 
 # Ignore idea related stuff
 
@@ -25,6 +26,7 @@ hs_err_pid*
 # Ignore gradle related stuff
 
 .gradle
+/**/gradle.properties
 /**/gradle-app.setting
 /**/local.properties
 /**/.gradletasknamecache
