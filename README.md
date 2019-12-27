@@ -21,32 +21,27 @@ With a mapper
         fun map(person: Person): PersonDto
     }
     
-#### Jitpack release
+#### Usage
+First apply kapt plugin
 
-__Please keep in your mind that this repository still a proof of concept, and absolutely not ready for production. A contribution, idea, discussion is always welcomed__
-
-A version which is using the mapstruct 1.3.0.Beta2 is available on [jitpack.io](https://jitpack.io/#Pozo/mapstruct-kotlin).  
-
-#### Jitpack howto
+    apply plugin: 'kotlin-kapt'
     
-First of all add `maven { url 'https://jitpack.io' }` to your repositories, and then add these to your dependencies
+Then add these to your project as dependency
 
-    api("com.github.pozo.mapstruct-kotlin:mapstruct-kotlin:1.3.0.Beta2")
-    
-    kapt("com.github.pozo.mapstruct-kotlin:mapstruct-kotlin-processor:1.3.0.Beta2")
+    api("com.github.pozo:mapstruct-kotlin:1.3.1.0")
+    kapt("com.github.pozo:mapstruct-kotlin-processor:1.3.1.0")
 
+Check out the directory `example` for a basic usage example.
+#### Versioning
+
+For example `1.3.1.0` the `1.3.1` is the mapstruct version and the last digit, in this case `0` reserved for patches.
 #### Project structure
 
- - `annotation` contains only the `KotlinBuilder` annotation
- - `builder-processor` responsible for generating the builders for the kotlin data classes
- - `processor` responsible for extending the `DefaultBuilderProvider` functionality according to the [documentation](http://mapstruct.org/documentation/dev/reference/html/#mapping-with-builders)
- - `test` responsible for demonstrating this library usage
+ - `mapstruct-kotlin-builder` contains only the `KotlinBuilder` annotation
+ - `mapstruct-kotlin-processor` responsible for generating the builders for the kotlin data classes with the help of a custom `DefaultBuilderProvider`
+ - `example` responsible for demonstrating this library usage
 
 #### Build and run the example application
-
-The building order is important since the `processor` project depends on `builder-processor` and mapstruct. 
-
-    ./gradlew clean build publishToMavenLocal
 
     ./gradlew -p example clean build
 
@@ -54,8 +49,8 @@ The building order is important since the `processor` project depends on `builde
 
  - ~~Map with custom types are not working~~
  - ~~Look over [kotlin-builder-annotation](https://github.com/ThinkingLogic/kotlin-builder-annotation) project and replace with class generating module (builder-processor)~~
- - Writing tests
- - Versioning and release process 
+ - ~~Writing tests~~
+ - ~~Versioning and release process~~ 
 
 # Licensing 
 
