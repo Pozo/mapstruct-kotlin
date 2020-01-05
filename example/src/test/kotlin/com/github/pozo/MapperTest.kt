@@ -1,9 +1,7 @@
 package com.github.pozo
 
-import com.github.pozo.mapper.PersonMapper
-import com.github.pozo.mapper.PersonMapperImpl
-import com.github.pozo.mapper.RoleMapper
-import com.github.pozo.mapper.RoleMapperImpl
+import com.github.pozo.domain.*
+import com.github.pozo.mapper.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -18,10 +16,16 @@ class MapperTest {
 
     private lateinit var roleMapper: RoleMapper
 
+    private lateinit var orderMapper: OrderMapper
+
+    private lateinit var productMapper: ProductMapper
+
     @Before
     fun setup() {
         personMapper = PersonMapperImpl()
         roleMapper = RoleMapperImpl()
+        orderMapper = OrderMapperImpl()
+        productMapper = ProductMapperImpl()
         person = Person("Test", "Test", 2, null)
         role = Role(1, "role one", "R1")
     }
@@ -42,13 +46,6 @@ class MapperTest {
         val personFromDto = personMapper.toPerson(personDto)
         assertEquals(person.firstName, personFromDto.firstName)
         assertEquals(person.lastName, personFromDto.lastName)
-    }
-
-    @Test
-    fun testPersonTwo() {
-        val personTwo = personMapper.toPersonTwo(person)
-        assertEquals(person.firstName, personTwo.name)
-        assertEquals(person.age, personTwo.age)
     }
 
     @Test
@@ -75,5 +72,19 @@ class MapperTest {
 
         assertNotNull(personDto.role)
         assertEquals(personDto.role, roleDto)
+    }
+
+    @Test
+    fun testOrderRoleDto() {
+        val role = Role(666, "Developer", "R1")
+        val person = Person("Test", "Michael", 2, role)
+        val division = Division(666, person)
+        val product = Product(5, 999, division)
+        val order = Order(isShipped = true, sent = true, product = product)
+
+        val orderDto = orderMapper.toDto(order)
+        val orderMapped = orderMapper.toOrder(orderDto)
+
+        assertEquals(order, orderMapped)
     }
 }

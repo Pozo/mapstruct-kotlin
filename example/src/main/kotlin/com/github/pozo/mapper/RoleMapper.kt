@@ -1,7 +1,7 @@
 package com.github.pozo.mapper
 
-import com.github.pozo.Role
-import com.github.pozo.RoleDto
+import com.github.pozo.domain.Role
+import com.github.pozo.domain.RoleDto
 import org.mapstruct.InheritInverseConfiguration
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
@@ -16,5 +16,5 @@ interface RoleMapper {
     fun toDto(role: Role): RoleDto
 
     @InheritInverseConfiguration
-    fun toRole(dto: RoleDto): Role
+    fun toRole(role: RoleDto): Role
 }

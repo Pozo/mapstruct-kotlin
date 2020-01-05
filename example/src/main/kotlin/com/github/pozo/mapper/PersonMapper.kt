@@ -1,8 +1,7 @@
 package com.github.pozo.mapper
 
-import com.github.pozo.Person
-import com.github.pozo.PersonDto
-import com.github.pozo.PersonTwo
+import com.github.pozo.domain.Person
+import com.github.pozo.domain.PersonDto
 import org.mapstruct.InheritInverseConfiguration
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
@@ -29,10 +28,6 @@ interface PersonMapper {
         ]
     )
     @InheritInverseConfiguration
-    fun toPerson(dto: PersonDto): Person
+    fun toPerson(person: PersonDto): Person
 
-    @Mappings(
-        value = [Mapping(source = "firstName", target = "name")]
-    )
-    fun toPersonTwo(person: Person): PersonTwo
 }
