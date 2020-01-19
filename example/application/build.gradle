@@ -1,0 +1,56 @@
+group 'com.github.pozo'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        kotlin_version = '1.3.61'
+        mapstructVersion = '1.3.1.Final'
+        mapstructKotlinVersion = '1.3.1.1'
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url('https://plugins.gradle.org/m2/')
+        }
+    }
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+}
+
+dependencies {
+    implementation project(":domain")
+
+    api("com.github.pozo:mapstruct-kotlin:${mapstructKotlinVersion}")
+    api("org.mapstruct:mapstruct:${mapstructVersion}")
+
+    kapt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+    kapt("com.github.pozo:mapstruct-kotlin-processor:${mapstructKotlinVersion}")
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+
