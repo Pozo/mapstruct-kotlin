@@ -60,7 +60,7 @@ object BuilderGenerator {
         private const val METHOD_NAME = "create"
 
         fun TypeSpec.Builder.addCreateMethod(it: TypeElement, fields: List<FieldSpec>) {
-            val guessedReturnValueType = ClassName.bestGuess("${it.simpleName}")
+            val guessedReturnValueType = ClassName.bestGuess("${it.qualifiedName}")
             val createMethod = createCreateMethodSpec(guessedReturnValueType, fields)
             this.addMethod(createMethod)
         }
