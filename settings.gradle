@@ -1,3 +1,4 @@
 rootProject.name = 'mapstruct-kotlin'
+include 'debug'
 include 'mapstruct-kotlin-builder'
 include 'mapstruct-kotlin-processor'
