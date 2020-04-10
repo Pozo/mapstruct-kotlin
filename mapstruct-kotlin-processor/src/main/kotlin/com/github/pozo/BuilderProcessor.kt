@@ -8,6 +8,7 @@ import com.github.pozo.BuilderGenerator.readHeader
 import com.google.auto.service.AutoService
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.TypeSpec
+import com.squareup.javapoet.TypeVariableName
 import kotlinx.metadata.Flag
 import kotlinx.metadata.Flags
 import kotlinx.metadata.KmClassVisitor
@@ -66,6 +67,7 @@ class BuilderProcessor : AbstractProcessor() {
 
         with(classBuilder) {
             this.addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+            this.addTypeVariables(typeElement.typeParameters.map { TypeVariableName.get(it) })
             val constructors = ElementFilter.constructorsIn(typeElement.enclosedElements)
 
             constructors.stream()
