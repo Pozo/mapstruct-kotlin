@@ -26,11 +26,20 @@ import kotlin.streams.toList
 class BuilderProcessor : AbstractProcessor() {
 
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
-        roundEnv.getElementsAnnotatedWith(KotlinBuilder::class.java)
+        val (dataClasses, nonDataClasses) = roundEnv.getElementsAnnotatedWith(KotlinBuilder::class.java)
             .filterIsInstance<TypeElement>()
             .filter { isAnnotatedByKotlin(it) }
-            .filter { isDataClass(it) }
-            .forEach { generateBuilder(it) }
+            .partition { isDataClass(it) }
+
+        nonDataClasses.forEach {
+            processingEnv.messager.printMessage(
+                javax.tools.Diagnostic.Kind.ERROR,
+                "@KotlinBuilder cannot be applied to non data classes",
+                it
+            )
+        }
+
+        dataClasses.forEach { generateBuilder(it) }
 
         return true
     }
