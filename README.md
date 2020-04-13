@@ -28,8 +28,8 @@ apply plugin: 'kotlin-kapt'
 ```
 Then add these to your project as dependency
 ```groovy
-api("com.github.pozo:mapstruct-kotlin:1.3.1.1")
-kapt("com.github.pozo:mapstruct-kotlin-processor:1.3.1.1")
+api("com.github.pozo:mapstruct-kotlin:1.3.1.2")
+kapt("com.github.pozo:mapstruct-kotlin-processor:1.3.1.2")
 ```
 Check out the directory `example` for a basic usage example.
 #### Versioning

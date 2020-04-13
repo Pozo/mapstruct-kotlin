@@ -1,6 +1,6 @@
 allprojects {
     group 'com.github.pozo'
-    version '1.3.1.1'
+    version '1.3.1.2'
 }
 
 buildscript {
