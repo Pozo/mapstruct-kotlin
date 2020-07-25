@@ -8,8 +8,8 @@ buildscript {
         kotlin_version = '1.3.61'
         kotlinxMetadataVersion = '0.0.5'
         kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
-        autoServiceVersion = '1.0-rc4'
-        mapstructVersion = '1.3.1.Final'
+        autoServiceVersion = '1.0-rc7'
+        mapstructVersion = '1.4.0.Beta1'
         javaPoetVersion = '1.11.1'
     }
 
