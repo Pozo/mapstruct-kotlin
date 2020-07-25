@@ -9,7 +9,7 @@ buildscript {
         kotlinxMetadataVersion = '0.0.5'
         kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
         autoServiceVersion = '1.0-rc7'
-        mapstructVersion = '1.4.0.Beta1'
+        mapstructVersion = '1.4.0.Beta3'
         javaPoetVersion = '1.11.1'
     }
 
