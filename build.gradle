@@ -5,7 +5,7 @@ allprojects {
 
 buildscript {
     ext {
-        kotlin_version = '1.3.61'
+        kotlin_version = '1.3.72'
         kotlinxMetadataVersion = '0.0.5'
         kotlinBuilderAnnotationVersion = '1.0-SNAPSHOT'
         autoServiceVersion = '1.0-rc7'
