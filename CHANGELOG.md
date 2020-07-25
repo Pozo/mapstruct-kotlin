@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0.0 (2020/07/25)
+
+#### Enhancements:
+
+- [#18](https://github.com/Pozo/mapstruct-kotlin/issues/18) Add support for Gradle incremental annotation processing
+
 ## 1.3.1.2 (2020/04/13)
 
 #### Enhancements:
