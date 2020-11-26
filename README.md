@@ -1,5 +1,7 @@
 ## mapstruct-kotlin
 
+> :warning: Since 1.4 MapStruct has support for using constructor arguments when instantiating mapping targets. [This also works with Kotlin data classes](https://github.com/mapstruct/mapstruct/issues/1672#issuecomment-733843277).
+
 Since mapstruct [1.3.0.Beta2](http://mapstruct.org/news/2018-07-15-mapstruct-1_3_0_Beta1-is-out-with-builder-support/) it's possible to use builders for immutable classes. [According to the documentation](http://mapstruct.org/documentation/dev/reference/html/#mapping-with-builders) you can implement your custom builder provider logic. This project take advantage of this and provide a custom `BuilderProvider` for kotlin data classes.
  
 So instead of this ([source](https://github.com/mapstruct/mapstruct-examples/tree/master/mapstruct-kotlin))
