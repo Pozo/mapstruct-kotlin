@@ -73,6 +73,7 @@ class BuilderProcessor : AbstractProcessor() {
         val packageName = processingEnv.elementUtils.getPackageOf(typeElement).toString()
         val builderClassName = "${typeElement.simpleName}Builder"
         val classBuilder = TypeSpec.classBuilder(builderClassName)
+            .addOriginatingElement(typeElement)
 
         with(classBuilder) {
             this.addModifiers(Modifier.PUBLIC, Modifier.FINAL)
